@@ -2,6 +2,9 @@ package org.example.case2;
 
 import java.util.LinkedList;
 
+/**
+ * https://leetcode.com/problems/palindrome-number/
+ */
 public class Problem2 {
 
     public static boolean test(int arg) {

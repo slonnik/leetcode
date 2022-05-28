@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * https://leetcode.com/problems/longest-common-prefix/
+ */
 public class Problem4 {
     public String test(String... strs) {
         // 1. sort by length
