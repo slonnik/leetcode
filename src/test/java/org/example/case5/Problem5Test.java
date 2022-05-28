@@ -9,7 +9,6 @@ public class Problem5Test {
 
     @Test
     void testPositive() {
-        //assertTrue(new Problem5().isValid("({})"));
         assertTrue(new Problem5().isValid("({[]})"));
     }
 
@@ -24,7 +23,24 @@ public class Problem5Test {
     }
 
     @Test
+    void testPositive4() {
+        assertTrue(new Problem5().isValid("{}{}()[]"));
+    }
+
+    @Test
     void testNegative() {
         assertFalse(new Problem5().isValid("(}"));
     }
+
+    @Test
+    void testNegative2() {
+        assertFalse(new Problem5().isValid("([)]"));
+    }
+
+    @Test
+    void testNegative3() {
+        assertFalse(new Problem5().isValid("){"));
+    }
+
+
 }

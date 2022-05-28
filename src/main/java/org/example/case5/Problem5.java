@@ -17,30 +17,54 @@ public class Problem5 {
         if (arg0.length() == 0) {
             return true;
         }
-        char startSymbol = arg0.charAt(0);
+
+        if (arg0.contains("{}")) {
+            return isValid(arg0.replaceAll("\\{\\}", ""));
+        } else if (arg0.contains("()")) {
+            return isValid(arg0.replaceAll("\\(\\)", ""));
+        } else if (arg0.contains("[]")) {
+            return isValid(arg0.replaceAll("\\[\\]", ""));
+        }
+        return false;
+
+    }
+
+    public boolean isValid2(String arg0) {
+        return internalValid(0, arg0.length() - 1, arg0);
+    }
+
+    private boolean internalValid(int start, int end, String arg0) {
+        if (end - start < 1) {
+            return false;
+        }
+
+        char startSymbol = arg0.charAt(start);
         if (!data.containsKey(startSymbol)) {
             return false;
         }
+
         char endSymbol = data.get(startSymbol);
-        int pos = findSymbol(arg0, endSymbol);
-        if (pos < 0) {
+        if (arg0.charAt(end) == endSymbol) {
+            if (end - start == 1) {
+                return true;
+            }
+            return internalValid(start + 1, end - 1, arg0);
+        }
+
+        if (end - start == 1) {
             return false;
         }
 
-        var result = isValid(arg0.substring(1, pos));
-        if (pos < arg0.length() - 1) {
-            result = result && isValid(arg0.substring(pos + 1));
-        }
-
-        return result;
-    }
-
-    private static int findSymbol(String arg0, char arg1) {
-        for (int i = 0; i < arg0.length(); ++i) {
-            if (arg0.charAt(i) == arg1) {
-                return i;
+        int i = end - 1;
+        while (i > start) {
+            if (arg0.charAt(i) == endSymbol) {
+                break;
             }
+            i--;
         }
-        return -1;
+        if (i == start) {
+            return false;
+        }
+        return internalValid(start, i, arg0) && internalValid(i + 1, end, arg0);
     }
 }
