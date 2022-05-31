@@ -1,47 +1,35 @@
 package org.example.case6;
 
+import org.example.util.ListNode;
+
+/**
+ * https://leetcode.com/problems/merge-two-sorted-lists/
+ */
 public class Problem6 {
-    public class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-
-    }
 
     public ListNode mergeTwoLists(ListNode arg0, ListNode arg1) {
-        int[] result = new int[arg0.length + arg1.length];
-        internal(result, 0, arg0, 0, arg1, 0);
-        return result;
+
+        return internalMerge(arg0, arg1);
     }
 
-    private static void internal(ListNode result,
-                                 ListNode arg0,
-                                 ListNode arg1) {
+    private static ListNode internalMerge(ListNode arg0, ListNode arg1) {
 
-        if (posResult >= result.length) {
-            return;
+        if((arg0 == null) && (arg1 == null)) {
+            return null;
         }
 
-        int val0 = arg0.val;
-        int val1 = arg1.val;
+        int value = Integer.MIN_VALUE;
+        int value0 = (arg0 == null) ? Integer.MAX_VALUE : arg0.val;
+        int value1 = (arg1 == null) ? Integer.MAX_VALUE : arg1.val;
 
-        if (val0 < val1) {
-            result.
-        } else {
-            result[posResult] = val1;
-            posArg1++;
+        if(value0 < value1) {
+            value = value0;
+            arg0 = arg0.next;
+        }else {
+            value = value1;
+            arg1 = arg1.next;
         }
-        internal(result, ++posResult, arg0, posArg0, arg1, posArg1);
+        return new ListNode(value, internalMerge(arg0, arg1));
     }
 }
