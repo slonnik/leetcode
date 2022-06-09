@@ -1,10 +1,4 @@
 package org.example.case13;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-
-import static java.lang.Math.pow;
-
 public class Problem13 {
 
     public int[] plusOne(int[] digits) {
