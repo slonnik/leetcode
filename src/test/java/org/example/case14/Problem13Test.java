@@ -1,6 +1,6 @@
-package org.example.case13;
+package org.example.case14;
 
-import org.example.util.case13.Problem13;
+import org.example.case13.Problem13;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

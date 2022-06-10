@@ -1,4 +1,4 @@
-package org.example.util.case13;
+package org.example.case13;
 
 /**
  * https://leetcode.com/problems/plus-one/
