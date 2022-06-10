@@ -1,4 +1,8 @@
-package org.example.case13;
+package org.example.util.case13;
+
+/**
+ * https://leetcode.com/problems/plus-one/
+ */
 public class Problem13 {
 
     public int[] plusOne(int[] digits) {

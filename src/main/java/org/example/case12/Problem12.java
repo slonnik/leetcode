@@ -1,5 +1,8 @@
 package org.example.case12;
 
+/**
+ * https://leetcode.com/problems/length-of-last-word/
+ */
 public class Problem12 {
 
     public int lengthOfLastWord(String s) {
