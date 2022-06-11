@@ -15,14 +15,15 @@ public class Problem15 {
     }
 
     private int internalSqrt(long leftEnd, long rightEnd, int arg0) {
-        long length = rightEnd - leftEnd;
-        if (length < 4) {
-            while (leftEnd * leftEnd < arg0) {
-                leftEnd++;
+
+        if (rightEnd - leftEnd < 2) {
+            if(rightEnd * rightEnd == arg0) {
+                return (int)rightEnd;
             }
-            return leftEnd * leftEnd == arg0 ? (int)leftEnd : (int)leftEnd - 1;
+
+            return (int)leftEnd;
         }
-        long middle = leftEnd + length / 2;
+        long middle = (leftEnd + rightEnd) / 2;
         if(middle*middle < arg0) {
             return internalSqrt(middle, rightEnd, arg0);
         }else {
