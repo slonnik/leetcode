@@ -2,6 +2,10 @@ package org.example.util;
 
 public class ListNodeTestUtils {
 
+    public static ListNode from(int... data) {
+       return fromArray(data);
+    }
+
     public static ListNode fromArray(int[] array) {
         if(array.length == 0) {
             return new ListNode();
