@@ -1,6 +1,5 @@
 package org.example.util;
 
-import java.util.LinkedList;
 
 public class TreeNodes {
 
@@ -20,27 +19,46 @@ public class TreeNodes {
     }
 
     private static TreeNode internalFrom(int currPos, int[] nodes) {
-        var rightPos = 2*(currPos+1) ;
+        var rightPos = 2 * currPos + 2;
         var leftPos = rightPos - 1;
 
-        if(leftPos >= nodes.length) {
+        if (currPos >= nodes.length) {
             return null;
         }
+        if (nodes[currPos] == Integer.MIN_VALUE) {
+            return null;
+        }
+        TreeNode leftNode = internalFrom(leftPos, nodes);
+        TreeNode rightNode = internalFrom(rightPos, nodes);
 
-        return new TreeNode(nodes[currPos], internalFrom(leftPos, nodes), internalFrom(rightPos, nodes));
-
-        //internalFrom(++currPos, nodes);
-        //var leftNode =  internalFrom(++currPos, nodes);
-        //var rightNode = internalFrom(++currPos, nodes);
-
-        //return null;
+        return new TreeNode(nodes[currPos], leftNode, rightNode);
     }
 
+
     public static int[] to(TreeNode node) {
-        //var list = new LinkedList<>();
-        //list.add(node.val);
-        //list.add(node.left.val);
-        //list.add(node.right.val);
-        return null;
+        int count = internalCount(node, null);
+        int[] data = new int[count];
+
+        internalTo(0, data, node);
+        return data;
+    }
+
+    private static int internalCount(TreeNode node, TreeNode arg0) {
+        if (node != null) {
+            return 1 + internalCount(node.left, node.right) + internalCount(node.right, node.left);
+        }
+        return (arg0 != null) ? 1 : 0;
+    }
+
+    private static void internalTo(int currPoss, int[] data, TreeNode node) {
+
+        if(node == null || currPoss < data.length) {
+            data[currPoss] = Integer.MIN_VALUE;
+            return;
+        }
+
+        data[currPoss] = node.val;
+        internalTo(2 * currPoss + 1, data, node.left);
+        internalTo(2 * currPoss + 2, data, node.right);
     }
 }
