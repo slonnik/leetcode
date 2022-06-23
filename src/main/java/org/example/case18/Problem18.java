@@ -15,11 +15,7 @@ public class Problem18 {
         if (p == null && q == null) {
             return true;
         }
-        if (p == null && q != null) {
-            return false;
-        }
-
-        if (p != null && q == null) {
+        if (p == null || q == null) {
             return false;
         }
 
