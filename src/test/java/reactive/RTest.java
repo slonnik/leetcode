@@ -18,7 +18,7 @@ public class RTest {
 
         var result = Mono.create(monoSink -> {
             monoSink.success("Ura " + Thread.currentThread().getName());
-        }).repeat(5).delayElements(Duration.ofSeconds(1));
+        }).repeat(5);//.delayElements(Duration.ofSeconds(1));
 
         for (int i = 0; i < 10; ++i) {
             result
@@ -27,6 +27,31 @@ public class RTest {
                     })
                     .subscribeOn(Schedulers.boundedElastic())
                     .subscribe(System.out::println, System.out::println, () -> {
+                        countDownLatch.countDown();
+                    }, Context.of("id", i));
+        }
+
+        countDownLatch.await();
+    }
+
+    @Test
+    void test2() throws Exception {
+
+        var countDownLatch = new CountDownLatch(10);
+
+        var result = Mono.create(monoSink -> {
+            monoSink.success("Ura " + Thread.currentThread().getName());
+        }).repeat(1_000);
+
+        for (int i = 0; i < 10; ++i) {
+            result
+                    .transformDeferredContextual((value, context) -> {
+                        return value.map(item -> "[%d] %s : %s".formatted(context.get("id"), item, Thread.currentThread().getName()));
+                    })
+                    .publishOn(Schedulers.boundedElastic())
+                    .subscribe(val -> {
+                        System.out.println(val);
+                    }, System.out::println, () -> {
                         countDownLatch.countDown();
                     }, Context.of("id", i));
         }
