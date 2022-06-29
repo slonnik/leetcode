@@ -28,6 +28,12 @@ public class Problem24Test {
     }
 
     @Test
+    void testPositive4() {
+        var node = new TreeNode(1);
+        assertTrue(new Problem24().hasPathSum(node, 1));
+    }
+
+    @Test
     void testNegative1() {
         var node = new TreeNode(1, new TreeNode(2), new TreeNode(3));
         assertFalse(new Problem24().hasPathSum(node, 5));
@@ -37,5 +43,11 @@ public class Problem24Test {
     void testNegative2() {
         var node = new TreeNode(1, new TreeNode(2), null);
         assertFalse(new Problem24().hasPathSum(node, 1));
+    }
+
+    @Test
+    void testNegative3() {
+        var node = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4, new TreeNode(5), null), null), null), null);
+        assertFalse(new Problem24().hasPathSum(node, 6));
     }
 }

@@ -8,12 +8,9 @@ import org.example.util.TreeNode;
 public class Problem24 {
 
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        if (root != null && root.left == null && root.right == null && root.val == targetSum) {
-            return true;
-        }
         TreeNode[] data = new TreeNode[]{null};
         internalSum(root, targetSum, data);
-        return data[0] != null && data[0] != root;
+        return data[0] != null;
     }
 
     private void internalSum(TreeNode root, int targetSum, TreeNode[] data) {
@@ -21,7 +18,7 @@ public class Problem24 {
             return;
         }
         targetSum -= root.val;
-        if (targetSum == 0) {
+        if (targetSum == 0 && root.right == null && root.left == null) {
             data[0] = root;
             return;
         }

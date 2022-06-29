@@ -8,11 +8,11 @@ import java.util.concurrent.Executors;
 
 public class J19Test {
 
-    @Test
+    /*@Test
     void testPositive1() throws Exception {
         var thread = Thread.ofVirtual().name("Test").start(() -> System.out.println("Thread: %s".formatted(Thread.currentThread().getName())));
         thread.join();
-    }
+    }*/
 
     @Test
     void testPositive2() throws Exception {
@@ -20,7 +20,7 @@ public class J19Test {
                 .newVirtualThreadPerTaskExecutor()
                 .submit(() -> System.out.println("Thread: %s".formatted(Thread.currentThread().getName())));
         result.get();*/
-        Callable<String> task = () -> "Thread: %s %s".formatted(Thread.currentThread().getName(), Thread.currentThread().isVirtual());
+        /*Callable<String> task = () -> "Thread: %s %s".formatted(Thread.currentThread().getName(), Thread.currentThread().isVirtual());
         Executors
                 .newThreadPerTaskExecutor(Thread.ofVirtual().name("Test", 0).factory())
                 .invokeAll(List.of(task, task))
@@ -34,7 +34,7 @@ public class J19Test {
                 })
                 .peek(System.out::println)
                 .allMatch(__ -> true);
-
+*/
 
     }
 }
