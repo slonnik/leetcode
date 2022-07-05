@@ -1,0 +1,1 @@
+package org.example.case29;import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.assertTrue;public class Problem29Test {    @Test    void testPositive1() {        assertTrue(new Problem29().hasCycle(null));    }}
