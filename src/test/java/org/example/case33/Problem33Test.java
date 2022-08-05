@@ -13,4 +13,10 @@ public class Problem33Test {
         int[] data = new int[]{0, 1, 3, 50, 75};
         assertEquals(List.of("2","4->49","51->74","76->99"), new Problem33().findMissingRanges(data, 0, 99));
     }
+
+    @Test
+    void testPositive2() {
+        int[] data = new int[]{-1};
+        assertEquals(List.of("2","4->49","51->74","76->99"), new Problem33().findMissingRanges(data, -1, -1));
+    }
 }

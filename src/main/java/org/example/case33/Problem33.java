@@ -8,31 +8,23 @@ import java.util.*;
 public class Problem33 {
 
     public List<String> findMissingRanges(int[] nums, int lower, int upper) {
-
-        var result = new LinkedHashMap<Integer, Deque<Integer>>();
-        int index = 0;
-        for (int i = lower; i <= upper; ++i) {
-            int value = (index < nums.length) ? nums[index] : upper + 1;
-            if (i < value) {
-                var deque = result.getOrDefault(value, new LinkedList<>());
-                deque.add(i);
-                result.put(value, deque);
-            } else if (i == value) {
-                index++;
+        List<String> result = new ArrayList<>();
+        int prev = lower - 1;
+        for (int i = 0; i <= nums.length; i++) {
+            int curr = (i < nums.length) ? nums[i] : upper + 1;
+            if (prev + 1 <= curr - 1) {
+                result.add(formatRange(prev + 1, curr - 1));
             }
+            prev = curr;
         }
-
-        List<String> resultList = new LinkedList<>();
-        for (Map.Entry<Integer, Deque<Integer>> entry : result.entrySet()) {
-            var deque = entry.getValue();
-            if (deque.size() == 1) {
-                resultList.add(String.format("%d", deque.element()));
-            } else {
-                resultList.add(String.format("%d->%d", deque.getFirst(), deque.getLast()));
-            }
-        }
-        return resultList;
+        return result;
     }
 
-
+    // formats range in the requested format
+    private String formatRange(int lower, int upper) {
+        if (lower == upper) {
+            return String.valueOf(lower);
+        }
+        return lower + "->" + upper;
+    }
 }
