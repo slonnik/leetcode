@@ -3,6 +3,9 @@ package org.example.case39;
 
 import java.util.*;
 
+/**
+ * https://leetcode.com/problems/isomorphic-strings/
+ */
 public class Problem39 {
 
     private static class Pair {
