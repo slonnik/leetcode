@@ -1,8 +1,6 @@
 package org.example.case42;
 
-import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import static java.lang.Math.abs;
@@ -13,19 +11,17 @@ import static java.lang.Math.abs;
 public class Problem42 {
 
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        Map<Integer, Deque<Integer>> data = new HashMap<>();
+        Map<Integer,Integer> data = new HashMap<>();
         for(int i =0 ; i < nums.length; ++i) {
             var key = nums[i];
             if(!data.containsKey(key)) {
-                Deque<Integer> deque = new LinkedList<>();
-                deque.add(i);
-                data.put(key, deque);
+                data.put(key, i);
             } else {
-                var deque = data.get(key);
-                if(abs(deque.peekLast() - i) <= k) {
+                var position = data.get(key);
+                if(Math.abs(position - i) <= k) {
                     return true;
                 }
-                deque.add(i);
+                data.put(key, i);
             }
         }
         return false;
